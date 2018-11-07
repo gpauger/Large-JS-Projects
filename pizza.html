@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="pizza.css">
+    <title>Menu   |   Order</title>
+<div class="dashed"><h1 class="menu-title">Greg's Pizza Menu</h1></div>
+
+<!---Begin Menu Items--->
+
+<div class="container">
+        <div class="row">
+          <div class="col dashed">
+           <span><h4>Size:</h4>
+          
+           <form>
+              <input type="radio" name="size" value=6> Personal Pizza: $6.00       
+              <input type="radio" name="size" value=10> Medium: $10.00       
+              <input type="radio" name="size" value=14> Large: $14.00 
+              <input type="radio" name="size" value=16> XL: $16.00 
+            </form> 
+          </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col dashed">
+            <h4>Crust Options:</h4>
+            <form>
+                    <input type="radio" name="crust" value=0 checked> Plain<br>
+                    <input type="radio" name="crust" value=0 checked> Garlic Butter<br>
+                    <input type="radio" name="crust" value=0 checked> Spicy<br>
+                    <input type="radio" name="crust" value=0> House Special<br>
+                    <input type="radio" name="crust" value=3> Stuffed Crust ($3.00 extra)
+                  </form> 
+          </div>
+          <div class="col dashed">
+          <h4>Sauce Options:</h4>
+           <form>
+                <input type="radio" name="sauce" value=0 checked> Marinara<br>
+                <input type="radio" name="sauce" value=0 checked> White Sauce<br>
+                <input type="radio" name="sauce" value=0 checked> BBQ<br>
+                <input type="radio" name="sauce" value=0> No Sauce
+              </form> 
+          </div>
+        </div>
+            <div class="row">
+                <div class="col dashed">
+                    <h4>Cheese Options:</h4>
+                    <form>
+                            <input type="radio" name="cheese" value=0 checked> Regular<br>
+                            <input type="radio" name="cheese" value=0 checked> No Cheese <br>
+                            <input type="radio" name="cheese" value=3> Extra Cheese ($3.00 extra)
+                          </form> 
+                </div>
+                <div class="col dashed">
+                        <h4>Meat Options: </h4>($1.00 each after first free meat topping)
+                        <form>
+                                <input type="checkbox" name="meat" value="1"> Pepperoni<br>
+                                <input type="checkbox" name="meat" value="1"> Sausage<br>
+                                <input type="checkbox" name="meat" value="1"> Canadian Bacon<br>
+                                <input type="checkbox" name="meat" value="1"> Ground Beef<br>
+                                <input type="checkbox" name="meat" value="1"> Anchovy<br> 
+                                <input type="checkbox" name="meat" value="1"> Chicken
+                              </form> 
+                </div>
+                <div class="col dashed">
+                            <h4>Vegetable Options:</h4>($1.00 each after first free veg topping)
+                            <form>
+                                    <input type="checkbox" name="veg" value="1"> Tomatoes<br>
+                                    <input type="checkbox" name="veg" value="1"> Onion<br>
+                                    <input type="checkbox" name="veg" value="1"> Olives<br>
+                                    <input type="checkbox" name="veg" value="1"> Peppers<br>
+                                    <input type="checkbox" name="veg" value="1"> Mushrooms<br> 
+                                    <input type="checkbox" name="veg" value="1"> Pineapple<br>
+                                    <input type="checkbox" name="veg" value="1"> Spinach<br> 
+                                    <input type="checkbox" name="veg" value="1"> Jalepeno
+                                  </form> 
+                </div>
+                
+            </div>
+      </div>
+<!---End Menu Items--->
+
+<!---Place Order Button-->
+<p style="text-align:center;">
+  <button type="button" onclick="total();">Place Order</button>
+</p>
+
+<!---Reciept--->
+
+<div class="container">
+  
+     <div class="row">
+        <div class="col"> Size:</div><div class="col"> Chioces</div><div class="col" id="subsize">$0.00</div>
+    </div>
+    <div class="row">
+        <div class="col"> Crust:</div><div class="col"> Chioces</div><div class="col" id="subcrust">$0.00</div>
+    </div>  
+    <div class="row">
+        <div class="col"> Sauce:</div><div class="col"> Chioces</div><div class="col" id="subsauce">$0.00</div>
+    </div>  
+    <div class="row">
+        <div class="col"> Cheese:</div><div class="col"> Chioces</div><div class="col" id="subcheese">$0.00</div>
+    </div>  
+    <div class="row">
+        <div class="col"> Meats:</div><div class="col"> Chioces</div><div class="col"  id="submeat">$0.00</div>    
+    </div>
+    <div class="row">
+        <div class="col"> Vegetables:</div><div class="col"> Chioces</div><div class="col" id="subveg">$0.00</div>    
+    </div>
+    <div class="row">
+        <div class="col"> </div><div class="col"> Order Total:</div><div class="col" id="subtotal"> $0.00</div>    
+    </div>
+  
+</div>
+<!---Running Total-->
+<p id="runtotal"></p>
+
+
+<!---Javascritp-->
+<script>
+  var vegcount = -1; 
+  var meatcount = -1;
+  var sizecost = 0;
+  var crustcost = 0;
+
+  function total() { 
+    sizecheck();
+    crustcheck();
+    cheesecheck();
+    checkmeat();
+    checkveg();
+    subsize.innerHTML = "$" + document.querySelector('input[name="size"]:checked').value + ".00";
+    subcrust.innerHTML = "$" + document.querySelector('input[name="crust"]:checked').value + ".00";
+    subsauce.innerHTML = "$" + document.querySelector('input[name="sauce"]:checked').value + ".00";
+    subcheese.innerHTML = "$" + document.querySelector('input[name="cheese"]:checked').value + ".00";
+    submeat.innerHTML = "$" + meatcount + ".00";
+    subveg.innerHTML = "$" + vegcount + ".00";
+    subtotal.innerHTML = "$" + (sizecost + meatcount + vegcount + crustcost + cheesecost) + ".00";
+   }
+  
+   function sizecheck() {
+    var x = document.querySelector('input[name="size"]:checked').value
+    if (x === "6") {sizecost=6}
+    else if (x === "10") {sizecost=10}
+    else if (x === "14") {sizecost=14}
+    else if (x === "16") {sizecost=16}
+  }
+
+  function crustcheck() {
+    var x = document.querySelector('input[name="crust"]:checked').value
+    if (x === "0") {crustcost=0}
+    else if (x === "3") {crustcost=3}
+  }
+
+  function cheesecheck() {
+    var x = document.querySelector('input[name="cheese"]:checked').value
+    if (x === "3") {cheesecost=3}
+    else if (x === "0") {cheesecost=0}
+  }
+
+  
+
+   function checkmeat() {  
+   var inputElems = document.getElementsByTagName("input");
+   meatcount = -1;
+   for (var i=0; i<inputElems.length; i++) {
+   if (inputElems[i].name === "meat" && inputElems[i].type === "checkbox" && inputElems[i].checked === true){
+       meatcount++;
+   }
+   }; 
+}
+function checkveg() { 
+   var inputElems = document.getElementsByTagName("input");
+   vegcount = -1;
+   for (var i=0; i<inputElems.length; i++) {
+   if (inputElems[i].name === "veg" && inputElems[i].type === "checkbox" && inputElems[i].checked === true){
+       vegcount++;
+   }
+   }; 
+}
+
+</script>
+</body>
+</html>

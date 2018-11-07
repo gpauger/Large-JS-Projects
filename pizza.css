@@ -1,0 +1,41 @@
+body {
+    background-color: lightblue;
+}
+
+.menu-title {
+    color:#000;
+    text-align: center;
+    text-shadow: 10px;
+	font-family:roboto;
+	font-weight:900;
+	text-transform:uppercase;
+}
+
+.container{
+    border-radius: 15px 50px;
+    background: rgba(245, 241, 241, 0.486);
+    padding: 50px;
+    width: auto;
+    height: auto;
+}
+
+.section {
+    color:#fff;
+    text-align: center;
+    text-shadow: 10px;
+	font-family:roboto;
+	font-weight:200;
+	text-transform:uppercase;
+}
+
+.dashed {border-style: dashed;
+        border-width: 6px;
+        padding: 10px 50px 5px 50px;
+        margin: 20px 30px;
+    }
+
+    button{
+        margin: 0 auto;
+    }
+
+  
